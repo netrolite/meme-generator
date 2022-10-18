@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Karlad, "Helvetica", "Verdana";
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(90deg, #672280, #A626D3);
+    color: #fff;
+    padding: 20px;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.logo-text {
+    display: inline-block;
+    font-size: 20.75px;
+    letter-spacing: -0.06em;
+    font-weight: 400;
+}
+
+.logo-img {
+    width: 31.3px;
+}
+
+.curr-project {
+    font-size: 0.75rem;
+    font-family: Inter;
+}
