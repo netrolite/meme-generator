@@ -26,7 +26,7 @@ export default function Meme() {
             <button 
             className="get-meme-btn"
             onClick={getRandomUrl}>
-                Get a new meme image
+                Get a new image
             </button>
 
             <img src={url} className="meme-img" alt="" />
