@@ -54,6 +54,7 @@ export default function Meme() {
                 <div className="bottom-text">{bottomText}</div>
                 <img src={url} className="meme-img" alt="" />
             </div>
+            <input />
         </main> 
     )
 }
