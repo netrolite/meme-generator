@@ -3,10 +3,12 @@ import data from "../data";
 
 export default function Meme() {
     const memes = data.data.memes;
-    const [url, setUrl] = React.useState(memes[Math.floor(Math.random() * memes.length)].url);
+    function getRandomIndex() { return Math.floor(Math.random() * memes.length ) }
+
+    const [url, setUrl] = React.useState(memes[getRandomIndex()].url);
 
     function getRandomUrl() {
-        let index = Math.floor(Math.random() * memes.length);
+        let index = getRandomIndex();
         let newUrl = memes[index].url;
         if(newUrl === url) {
             console.log("URLs are the same. Getting a new one...");
