@@ -7,7 +7,7 @@ export default function App() {
         <>
         <Header />
         <main className="main">
-        <Form />
+            <Form />
         </main>
         </>
     )
