@@ -59,7 +59,6 @@ body {
     border: 1px solid #D5D4D8;
     border-radius: 5px;
     padding: 3px 10px;
-    user-select: none;
 }
 
 .get-meme-btn {
@@ -79,7 +78,6 @@ body {
     width: 100%;
     max-width: 100%;
     border-radius: 5px;
-    user-select: none;
 }
 
 .image-text-wrapper {
