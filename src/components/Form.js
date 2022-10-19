@@ -12,28 +12,35 @@ export default function Meme() {
 
     function getRandomUrl() {
         let newIndex = getRandomIndex();
-        if(memes[newIndex].url === url) {
-            newIndex = getRandomIndex(); 
-            console.log("hi");  
-            if(memes[newIndex].url === url) {
-                newIndex = getRandomIndex();
-            }
-        } 
+        // gets a new random index if old and new URLs are the same
+        if(memes[newIndex].url === url) newIndex = getRandomIndex();
+
         let newUrl = memes[newIndex].url;
         
-        console.log(document.querySelector(".top-text-input").value);
-        console.log(document.querySelector(".bottom-text-input").value);
-
         setUrl(newUrl);
         setTopText(document.querySelector(".top-text-input").value)
+        setBottomText(document.querySelector(".bottom-text-input").value)
+    }
+
+    function handleChangeTop() {
+        setTopText(document.querySelector(".top-text-input").value)
+    }
+
+    function handleChangeBottom() {
         setBottomText(document.querySelector(".bottom-text-input").value)
     }
 
     return (
         <main className="meme">
             <form className="form">
-                <input className="top-text-input" placeholder="Top text"/>
-                <input className="bottom-text-input" placeholder="Bottom text"/>
+                <input 
+                className="top-text-input" 
+                placeholder="Top text"
+                onChange={handleChangeTop}/>
+                <input 
+                className="bottom-text-input" 
+                placeholder="Bottom text"
+                onChange={handleChangeBottom}/>
             </form>
             <button 
             className="get-meme-btn"
