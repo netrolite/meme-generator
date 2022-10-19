@@ -3,6 +3,8 @@
     padding: 0;
 }
 
+::-webkit-scrollbar { display: none; }
+
 body {
     font-family: Karlad, "Helvetica", "Verdana";
 }
@@ -66,4 +68,13 @@ body {
     border: none;
     border-radius: 5px;
     margin-top: 15px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.meme-img {
+    object-fit: contain;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 5px;
 }

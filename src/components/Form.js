@@ -2,10 +2,17 @@ import React from "react";
 import data from "../data";
 
 export default function Meme() {
-    function getMeme() {
-        const memes = data.data.memes
-        let randomIndex = Math.floor(Math.random() * memes.length)
-        console.log(memes[randomIndex].url);
+    const memes = data.data.memes;
+    const [url, setUrl] = React.useState(memes[Math.floor(Math.random() * memes.length)].url);
+
+    function getRandomUrl() {
+        let index = Math.floor(Math.random() * memes.length);
+        let newUrl = memes[index].url;
+        if(newUrl === url) {
+            console.log("URLs are the same. Getting a new one...");
+            getRandomUrl();
+        }; 
+        setUrl(newUrl);
     }
 
     return (
@@ -16,9 +23,11 @@ export default function Meme() {
             </form>
             <button 
             className="get-meme-btn"
-            onClick={getMeme}>
+            onClick={getRandomUrl}>
                 Get a new meme image
             </button>
+
+            <img src={url} className="meme-img" alt="" />
         </main> 
     )
 }
