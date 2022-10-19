@@ -71,6 +71,7 @@ body {
     margin-top: 15px;
     margin-bottom: 30px;
     cursor: pointer;
+    user-select: none;
 }
 
 .meme-img {
