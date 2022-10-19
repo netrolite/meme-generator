@@ -36,11 +36,13 @@ export default function Meme() {
                 <input 
                 className="top-text-input" 
                 placeholder="Top text"
-                onChange={handleChangeTop}/>
+                onChange={handleChangeTop}
+                defaultValue=""/>
                 <input 
                 className="bottom-text-input" 
                 placeholder="Bottom text"
-                onChange={handleChangeBottom}/>
+                onChange={handleChangeBottom}
+                defaultValue=""/>
             </form>
             <button 
             className="get-meme-btn"
