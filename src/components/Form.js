@@ -5,7 +5,6 @@ export default function Meme() {
     const memes = data.data.memes;
     function getRandomIndex() { return Math.floor(Math.random() * memes.length ) }
 
-    // "url" is set using getRandomIndex() only initially
     const [url, setUrl] = React.useState(memes[getRandomIndex()].url);
     const [topText, setTopText] = React.useState();
     const [bottomText, setBottomText] = React.useState();
