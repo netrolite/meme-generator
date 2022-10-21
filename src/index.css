@@ -82,7 +82,7 @@ body {
 }
 
 .image-text-wrapper {
-    position: relative;
+    position: absolute;
 }
 
 .top-text, .bottom-text {
