@@ -1,59 +1,89 @@
-import React from "react";
+import React, { useState } from "react";
 import data from "../data";
 
 export default function Meme() {
     const memes = data.data.memes;
     function getRandomIndex() { return Math.floor(Math.random() * memes.length ) }
 
-    const [url, setUrl] = React.useState(memes[getRandomIndex()].url);
-    const [topText, setTopText] = React.useState();
-    const [bottomText, setBottomText] = React.useState();
+    const [url, setUrl] = useState(memes[getRandomIndex()].url);
+    const [topText, setTopText] = useState();
+    const [bottomText, setBottomText] = useState();
+    const [fontSize, setFontSize] = useState("16px");
 
     function getRandomUrl() {
-        let newIndex = getRandomIndex();
-        // gets a new random index if old and new URLs are the same
-        if(memes[newIndex].url === url) newIndex = getRandomIndex();
-
-        let newUrl = memes[newIndex].url;
-        
+        let newUrl = memes[getRandomIndex()].url;        
         setUrl(newUrl);
-        setTopText(document.querySelector(".top-text-input").value)
-        setBottomText(document.querySelector(".bottom-text-input").value)
     }
 
-    function handleChangeTop() {
-        setTopText(document.querySelector(".top-text-input").value)
+    function handleInputChange(event) {
+        if(event.target.className === "top-text-input") {
+            setTopText(event.target.value)
+        }
+        else if(event.target.className === "bottom-text-input") {
+            setBottomText(event.target.value)
+        }
     }
 
-    function handleChangeBottom() {
-        setBottomText(document.querySelector(".bottom-text-input").value)
+    function applyFontSize(event) {
+        const input = 
+        document.querySelector(".font-size-input").value
+
+        setFontSize(input + "px");
     }
 
     return (
         <main className="meme">
-            <form className="form">
+            <form className="top-bottom-inputs">
                 <input 
-                className="top-text-input" 
-                placeholder="Top text"
-                onChange={handleChangeTop}
-                defaultValue="Hi"/>
+                    className="top-text-input" 
+                    placeholder="Top text"
+                    onChange={handleInputChange}
+                />
                 <input 
-                className="bottom-text-input" 
-                placeholder="Bottom text"
-                onChange={handleChangeBottom}
-                defaultValue="Hello"/>
+                    className="bottom-text-input" 
+                    placeholder="Bottom text"
+                    onChange={handleInputChange}
+                />
             </form>
+
+            <div className="font-size-wrapper">
+                <input 
+                    className="font-size-input"
+                    placeholder="Font size (in px)"
+                    onChange={handleInputChange}
+                />
+                <button 
+                    className="font-size-button"
+                    onClick={applyFontSize}
+                >
+                Apply
+                </button>
+            </div>    
+
             <button 
             className="get-meme-btn"
             onClick={getRandomUrl}>
                 Get a new image
             </button>
             <div className="image-text-wrapper">
-                <div className="top-text">{topText}</div>
-                <div className="bottom-text">{bottomText}</div>
-                <img src={url} className="meme-img" alt="" />
+                <div 
+                    className="top-text"
+                    style={{
+                        fontSize: fontSize
+                    }}
+                >
+                    {topText}
+                </div>
+                <div 
+                    className="bottom-text"
+                    style={{
+                        fontSize: fontSize
+                    }}
+                >
+                    {bottomText}
+                </div>
+                <img src={url} className="meme-img" alt="the funny" />
             </div>
-            <input />
         </main> 
     )
 }
