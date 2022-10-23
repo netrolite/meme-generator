@@ -8,7 +8,7 @@ export default function Meme() {
     const [url, setUrl] = useState(memes[getRandomIndex()].url);
     const [topText, setTopText] = useState();
     const [bottomText, setBottomText] = useState();
-    const [fontSize, setFontSize] = useState("16px");
+    const [fontSize, setFontSize] = useState("32px");
 
     function getRandomUrl() {
         let newUrl = memes[getRandomIndex()].url;        
@@ -24,9 +24,15 @@ export default function Meme() {
         }
     }
 
-    function applyFontSize(event) {
+    function applyFontSize() {
         const input = 
         document.querySelector(".font-size-input").value
+
+        const regexNotPX = /^\d+\s*(rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%){1}\s*$/i
+        const splitRegex = /\d+/
+
+        if(regexNotPX.test(input) === true) console.log(true)  
+        else console.log(false);      
 
         setFontSize(input + "px");
     }
@@ -49,7 +55,7 @@ export default function Meme() {
             <div className="font-size-wrapper">
                 <input 
                     className="font-size-input"
-                    placeholder="Font size (in px)"
+                    placeholder="Font size (default 32px)"
                     onChange={handleInputChange}
                 />
                 <button 
