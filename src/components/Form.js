@@ -28,7 +28,7 @@ export default function Meme() {
         event.preventDefault();
 
         const input = document.querySelector(".font-size-input").value
-        const regexNotPX = /^\s*\d+\s*(rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%){1}\s*$/i
+        const regexNotPX = /^\s*\d+\s*(px|rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%){1}\s*$/i
         const regexOnlyNumbers = /^\s*\d+\s*$/
 
         console.log(input, "<-- initial input");
@@ -62,7 +62,7 @@ export default function Meme() {
                 />
             </form>
 
-            <form className="font-size-wrapper">
+            <form className="customization-wrapper">
                 <input 
                     className="font-size-input"
                     placeholder="Font size (default 32px)"

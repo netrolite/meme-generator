@@ -52,7 +52,7 @@ body {
     gap: 18px;  
 }
 
-.top-bottom-inputs input, .font-size-wrapper input {
+.top-bottom-inputs input, .font-size-input {
     width: 100%;
     height: 35px;
     border: 1px solid #D5D4D8;
@@ -61,7 +61,7 @@ body {
     padding: 3px 0;
 }
 
-.font-size-wrapper {
+.customization-wrapper {
      margin-top: 18px; 
      display: grid;
      grid-template-columns: 4fr 1fr;
@@ -124,10 +124,14 @@ body {
 
 @media only screen and (max-device-width: 480px) {
     * { font-size: 1rem; }
-    .get-meme-btn { padding: 10px; }
-    .top-bottom-inputs input { padding: 0 10px; }
-    .top-text, .bottom-text {
+    
+    .top-text, 
+    .bottom-text {
         font-size: 1.5rem; 
         -webkit-text-stroke: black 1px;
+    }
+
+    .customization-wrapper {
+        grid-template-columns: 5fr 2fr;
     }
 }
