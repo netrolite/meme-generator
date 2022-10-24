@@ -42,6 +42,7 @@ if(regexOnlyNumbers.test) {
 else {
    setFontSize(noSpaces)
 }
+}
 
         //if(regexNotPX.test(input) === true) {
             // replaces all white spaces with "" (basically removes them)
