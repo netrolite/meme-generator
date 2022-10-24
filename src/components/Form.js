@@ -28,7 +28,7 @@ export default function Meme() {
         event.preventDefault();
 
         const input = document.querySelector(".font-size-input").value
-        const regexUnitSpecified = /^\s*\d+\s*([\.\,]\s*\d+)?\s*(px|rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%)\s*$/i
+        const regexUnitSpecified = /^\s*\d+\s*([.,]\s*\d+)?\s*(px|rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%)\s*$/i
         const regexUnitUnspecified = /^\s*\d+\s*([\.\,]\s*\d+)?\s*$/
 
         console.log(input, "<-- initial input");
