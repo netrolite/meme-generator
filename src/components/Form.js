@@ -28,21 +28,21 @@ export default function Meme() {
         event.preventDefault();
 
         const input = document.querySelector(".font-size-input").value
-        const regexNotPX = /^\s*\d+\s*(px|rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%){1}\s*$/i
-        const regexOnlyNumbers = /^\s*\d+\s*$/
+        const regexUnitSpecified = /^\s*\d+\s*([\.\,]\s*\d+)?\s*(px|rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%)\s*$/i
+        const regexUnitUnspecified = /^\s*\d+\s*([\.\,]\s*\d+)?\s*$/
 
         console.log(input, "<-- initial input");
 
-        let noSpaces = input.replace(/\s/g, "")
-
-        if(regexNotPX.test(input) === true) {
-            // replaces all white spaces with "" (basically removes them)
-           let noSpaces = input.replace(/\s/g, "")
-           setFontSize(noSpaces)
-       }  
-       else if(regexOnlyNumbers.test(input)) {
+        if(regexUnitSpecified.test(input)) {
+            // removes all spaces
+            console.log("regexUnitSpecified", true);
             let noSpaces = input.replace(/\s/g, "")
-           setFontSize(noSpaces + "px");
+            setFontSize(noSpaces)
+       }  
+       else if(regexUnitUnspecified.test(input)) {
+            let noSpaces = input.replace(/\s/g, "")
+            console.log("regexUnitUnspecified", true);
+            setFontSize(noSpaces + "px");
        } 
        else console.error("Invalid CSS units!")
    }
