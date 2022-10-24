@@ -32,17 +32,28 @@ export default function Meme() {
         const regexOnlyNumbers = /^\s*\d+\s*$/
 
         console.log(input, "<-- initial input");
-        if(regexNotPX.test(input) === true) {
+
+let noSpaces = input.replace(/\s/g, "")
+
+if(regexOnlyNumbers.test) {
+   setFontSize(noSpaces + "px")
+}
+else {
+   setFontSize(noSpaces)
+}
+}
+
+        //if(regexNotPX.test(input) === true) {
             // replaces all white spaces with "" (basically removes them)
-            let noSpaces = input.replace(/\s/g, "")
-            setFontSize(noSpaces)
-        }  
-        else if(regexOnlyNumbers.test(input)) {
-            let noSpaces = input.replace(/\s/g, "")
-            setFontSize(noSpaces + "px");
-        } 
-        else console.error("Invalid CSS units!")
-    }
+           // let noSpaces = input.replace(/\s/g, "")
+           // setFontSize(noSpaces)
+      //  }  
+      //  else if(regexOnlyNumbers.test(input)) {
+            //let noSpaces = input.replace(/\s/g, "")
+           // setFontSize(noSpaces + "px");
+       // } 
+       // else console.error("Invalid CSS units!")
+   // }
 
     return (
         <main className="meme">
