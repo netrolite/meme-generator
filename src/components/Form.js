@@ -24,17 +24,25 @@ export default function Meme() {
         }
     }
 
-    function applyFontSize() {
+    function applyFontSize(event) {
+        event.preventDefault();
+
         const input = 
         document.querySelector(".font-size-input").value
+        const regexNotPX = /^\s*\d+\s*(rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%){1}\s*$/i
+        const regexOnlyNumbers = /^\s*\d+\s*$/
 
-        const regexNotPX = /^\d+\s*(rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%){1}\s*$/i
-        const splitRegex = /\d+/
-
-        if(regexNotPX.test(input) === true) console.log(true)  
-        else console.log(false);      
-
-        setFontSize(input + "px");
+        console.log(input, "<-- initial input");
+        if(regexNotPX.test(input) === true) {
+            // replaces all white spaces with "" (basically removes them)
+            let noSpaces = input.replace(/\s/g, "")
+            setFontSize(noSpaces)
+        }  
+        else if(regexOnlyNumbers.test(input)) {
+            let noSpaces = input.replace(/\s/g, "")
+            setFontSize(noSpaces + "px");
+        } 
+        else console.error("Invalid CSS units!")
     }
 
     return (
@@ -52,7 +60,7 @@ export default function Meme() {
                 />
             </form>
 
-            <div className="font-size-wrapper">
+            <form className="font-size-wrapper">
                 <input 
                     className="font-size-input"
                     placeholder="Font size (default 32px)"
@@ -64,7 +72,7 @@ export default function Meme() {
                 >
                 Apply
                 </button>
-            </div>    
+            </form>    
 
             <button 
             className="get-meme-btn"
