@@ -27,8 +27,7 @@ export default function Meme() {
     function applyFontSize(event) {
         event.preventDefault();
 
-        const input = 
-        document.querySelector(".font-size-input").value
+        const input = document.querySelector(".font-size-input").value
         const regexNotPX = /^\s*\d+\s*(rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%){1}\s*$/i
         const regexOnlyNumbers = /^\s*\d+\s*$/
 
