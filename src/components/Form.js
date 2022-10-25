@@ -29,20 +29,25 @@ export default function Meme() {
 
         const input = document.querySelector(".font-size-input").value
         const regexUnitSpecified = /^\s*\d+\s*([.,]\s*\d+)?\s*(px|rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%)\s*$/i
-        const regexUnitUnspecified = /^\s*\d+\s*([\.\,]\s*\d+)?\s*$/
+        const regexUnitUnspecified = /^\s*\d+\s*([.,]\s*\d+)?\s*$/
 
         console.log(input, "<-- initial input");
 
+        function formatInput(string) {
+            string = string.replace(/\s/g, "");
+            return string.replace(/,/g, ".")
+        }
+
+        // if user has specified the unit ("33px" or "2.5em")
         if(regexUnitSpecified.test(input)) {
             // removes all spaces
             console.log("regexUnitSpecified", true);
-            let noSpaces = input.replace(/\s/g, "")
-            setFontSize(noSpaces)
+            setFontSize(formatInput(input))
        }  
+       // if user only typed in the number ("55" instead of "55px")
        else if(regexUnitUnspecified.test(input)) {
-            let noSpaces = input.replace(/\s/g, "")
             console.log("regexUnitUnspecified", true);
-            setFontSize(noSpaces + "px");
+            setFontSize(formatInput(input) + "px")
        } 
        else console.error("Invalid CSS units!")
    }
