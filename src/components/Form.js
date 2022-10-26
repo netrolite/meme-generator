@@ -9,6 +9,7 @@ export default function Meme() {
     const [topText, setTopText] = useState();
     const [bottomText, setBottomText] = useState();
     const [fontSize, setFontSize] = useState("32px");
+    const [textStroke, setTextStroke] = useState("2px");
 
     function getRandomUrl() {
         let newUrl = memes[getRandomIndex()].url;        
@@ -27,12 +28,17 @@ export default function Meme() {
     function applyFontSize(event) {
         event.preventDefault();
 
-        const input = document.querySelector(".font-size-input").value
+        const input = document.querySelector("#font-size-input").value
+        // checks if the unit (px, rem, em...) is specified
         const regexUnitSpecified = /^\s*\d+\s*([.,]\s*\d+)?\s*(px|rem|em|cm|mm|in|pt|pc|ex|ch|vw|vh|vmin|vmax|%)\s*$/i
+
+        // checks if the unit (px, rem, em...) is NOT specified
         const regexUnitUnspecified = /^\s*\d+\s*([.,]\s*\d+)?\s*$/
 
         console.log(input, "<-- initial input");
 
+        // removes all whitespace from the input string
+        // " 22 px " becomes => "22px"
         function formatInput(string) {
             string = string.replace(/\s/g, "");
             return string.replace(/,/g, ".")
@@ -40,16 +46,25 @@ export default function Meme() {
 
         // if user has specified the unit ("33px" or "2.5em")
         if(regexUnitSpecified.test(input)) {
-            // removes all spaces
+            // removes all whitespaces
             console.log("regexUnitSpecified", true);
             setFontSize(formatInput(input))
        }  
-       // if user only typed in the number ("55" instead of "55px")
+       // if user left the unit unspecified ("55" instead of "55px"),
+       // defaults to using px
        else if(regexUnitUnspecified.test(input)) {
             console.log("regexUnitUnspecified", true);
             setFontSize(formatInput(input) + "px")
        } 
-       else console.error("Invalid CSS units!")
+       else console.error("Invalid input!")
+   }
+
+   function applyStroke(event) {
+        event.preventDefault();
+
+        const input = document.querySelector("#stroke-input").value
+        console.log(input);
+        setTextStroke(input)
    }
 
     return (
@@ -67,19 +82,35 @@ export default function Meme() {
                 />
             </form>
 
-            <form className="customization-wrapper">
-                <input 
-                    className="font-size-input"
-                    placeholder="Font size (default 32px)"
-                    onChange={handleInputChange}
-                />
-                <button 
-                    className="font-size-button"
-                    onClick={applyFontSize}
-                >
-                Apply
-                </button>
-            </form>    
+            <div className="customization-wrapper">
+                <form className="cust-option-wrapper">
+                    <input 
+                        className="cust-input"
+                        id="font-size-input"
+                        placeholder="Font size (default 32px)"
+                    />
+                    <button 
+                        className="apply-button"
+                        onClick={applyFontSize}
+                    >
+                    Apply
+                    </button>
+                </form>
+
+                <form className="cust-option-wrapper">
+                    <input 
+                        className="cust-input"
+                        id="stroke-input"
+                        placeholder="Font stroke (default 2px)"
+                    />
+                    <button 
+                        className="apply-button"
+                        onClick={applyStroke}
+                    >
+                    Apply
+                    </button>
+                </form>
+            </div>    
 
             <button 
             className="get-meme-btn"
@@ -90,7 +121,8 @@ export default function Meme() {
                 <div 
                     className="top-text"
                     style={{
-                        fontSize: fontSize
+                        fontSize: fontSize,
+                        WebkitTextStroke: textStroke + " black",
                     }}
                 >
                     {topText}
@@ -98,7 +130,8 @@ export default function Meme() {
                 <div 
                     className="bottom-text"
                     style={{
-                        fontSize: fontSize
+                        fontSize: fontSize,
+                        WebkitTextStroke: textStroke + " black",
                     }}
                 >
                     {bottomText}
