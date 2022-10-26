@@ -3,7 +3,7 @@ import data from "../data";
 
 export default function Meme() {
     const memes = data.data.memes;
-    function getRandomIndex() { return Math.floor(Math.random() * memes.length ) }
+    function getRandomIndex() { return Math.floor(Math.random() * memes.length) }
 
     const [url, setUrl] = useState(memes[getRandomIndex()].url);
     const [topText, setTopText] = useState();
@@ -11,11 +11,14 @@ export default function Meme() {
     const [fontSize, setFontSize] = useState("32px");
     const [textStroke, setTextStroke] = useState("2px black");
 
+    // gets 1 random image URL out of 100
     function getRandomUrl() {
         let newUrl = memes[getRandomIndex()].url;        
         setUrl(newUrl);
     }
 
+    // fired when either "top text" or "bottom text" input fields are changed
+    // and checks which one of them was changed to render text accordingly
     function handleInputChange(event) {
         if(event.target.className === "top-text-input") {
             setTopText(event.target.value)
@@ -32,6 +35,7 @@ export default function Meme() {
     }
 
     function applyFontSize(event) {
+        // prevents page reload
         event.preventDefault();
 
         const input = document.querySelector("#font-size-input").value
@@ -41,22 +45,14 @@ export default function Meme() {
         // checks if the unit (px, rem, em...) is NOT specified
         const regexUnitUnspecified = /^\s*\d+\s*([.,]\s*\d+)?\s*$/
 
-        console.log(input, "<-- initial input");
-
-        // removes all whitespace from the input string
-        // " 22 px " becomes => "22px"
-        
-
         // if user has specified the unit ("33px" or "2.5em")
         if(regexUnitSpecified.test(input)) {
             // removes all whitespaces
-            console.log("regexUnitSpecified", true);
             setFontSize(formatInput(input))
        }  
        // if user left the unit unspecified ("55" instead of "55px"),
        // defaults to using px
        else if(regexUnitUnspecified.test(input)) {
-            console.log("regexUnitUnspecified", true);
             setFontSize(formatInput(input) + "px")
        } 
        else console.error("Invalid input!")
@@ -72,15 +68,12 @@ export default function Meme() {
         const regexUnitUnspecified = /^\s*\d+\s*([.,]\s*\d+)?\s*$/
 
         if(regexUnitSpecified.test(input)) {
-            console.log("Unit specified!");
-            console.log(formatInput(input) + " black");
             setTextStroke(formatInput(input) + " black")
         }
         else if(regexUnitUnspecified.test(input)) {
-            console.log("Unit unspecified!");
-            console.log(formatInput(input) + "px black");
             setTextStroke(formatInput(input) + "px black");
         }
+        else console.error("Text stroke can only use 'px' values")
    }
 
     return (
