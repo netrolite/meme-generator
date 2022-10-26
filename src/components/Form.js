@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import data from "../data";
+import TopBottomInputs from "./TopBottomInputs";
+import CustomizationWrapper from "./CustomizationWrapper";
+import GetMemeButton from "./GetMemeButton";
+import ImageTextWrapper from "./ImageTextWrapper";
 
 export default function Meme() {
     const memes = data.data.memes;
@@ -13,7 +17,20 @@ export default function Meme() {
 
     // gets 1 random image URL out of 100
     function getRandomUrl() {
-        let newUrl = memes[getRandomIndex()].url;        
+        console.log(url);
+        let newUrl = memes[getRandomIndex()].url
+
+        // this horrible staircase of ifs makes sure images don't repeat
+        if(newUrl === url) {
+            newUrl = memes[getRandomIndex()].url
+            if(newUrl === url) {
+                newUrl = memes[getRandomIndex()].url
+                if(newUrl === url) {
+                    newUrl = memes[getRandomIndex()].url
+                }
+            }
+        }
+
         setUrl(newUrl);
     }
 
@@ -78,75 +95,27 @@ export default function Meme() {
 
     return (
         <main className="meme">
-            <form className="top-bottom-inputs">
-                <input 
-                    className="top-text-input" 
-                    placeholder="Top text"
-                    onChange={handleInputChange}
-                />
-                <input 
-                    className="bottom-text-input" 
-                    placeholder="Bottom text"
-                    onChange={handleInputChange}
-                />
-            </form>
+            <TopBottomInputs 
+                handleInputChange={handleInputChange} 
+            />
 
-            <div className="customization-wrapper">
-                <form className="cust-option-wrapper">
-                    <input 
-                        className="cust-input"
-                        id="font-size-input"
-                        placeholder="Font size (default 32px)"
-                    />
-                    <button 
-                        className="apply-button"
-                        onClick={applyFontSize}
-                    >
-                    Apply
-                    </button>
-                </form>
+            <CustomizationWrapper 
+                applyFontSize={applyFontSize}
+                applyStroke={applyStroke}
+            />            
 
-                <form className="cust-option-wrapper">
-                    <input 
-                        className="cust-input"
-                        id="stroke-input"
-                        placeholder="Font stroke (default 2px)"
-                    />
-                    <button 
-                        className="apply-button"
-                        onClick={applyStroke}
-                    >
-                    Apply
-                    </button>
-                </form>
-            </div>    
+            <GetMemeButton 
+                getRandomUrl={getRandomUrl}
+            />
 
-            <button 
-            className="get-meme-btn"
-            onClick={getRandomUrl}>
-                Get a new image
-            </button>
-            <div className="image-text-wrapper">
-                <div 
-                    className="top-text"
-                    style={{
-                        fontSize: fontSize,
-                        WebkitTextStroke: textStroke,
-                    }}
-                >
-                    {topText}
-                </div>
-                <div 
-                    className="bottom-text"
-                    style={{
-                        fontSize: fontSize,
-                        WebkitTextStroke: textStroke,
-                    }}
-                >
-                    {bottomText}
-                </div>
-                <img src={url} className="meme-img" alt="the funny" />
-            </div>
+            <ImageTextWrapper 
+                topText={topText}
+                bottomText={bottomText}
+                fontSize={fontSize}
+                textStroke={textStroke}
+                url={url}
+            />
+
         </main> 
     )
 }
