@@ -9,7 +9,7 @@ export default function Meme() {
     const [topText, setTopText] = useState();
     const [bottomText, setBottomText] = useState();
     const [fontSize, setFontSize] = useState("32px");
-    const [textStroke, setTextStroke] = useState("2px");
+    const [textStroke, setTextStroke] = useState("2px black");
 
     function getRandomUrl() {
         let newUrl = memes[getRandomIndex()].url;        
@@ -23,6 +23,12 @@ export default function Meme() {
         else if(event.target.className === "bottom-text-input") {
             setBottomText(event.target.value)
         }
+    }
+
+    // removes all whitespace and replaces commas with periods
+    function formatInput(string) {
+        string = string.replace(/\s/g, "");
+        return string.replace(/,/g, ".")
     }
 
     function applyFontSize(event) {
@@ -39,10 +45,7 @@ export default function Meme() {
 
         // removes all whitespace from the input string
         // " 22 px " becomes => "22px"
-        function formatInput(string) {
-            string = string.replace(/\s/g, "");
-            return string.replace(/,/g, ".")
-        }
+        
 
         // if user has specified the unit ("33px" or "2.5em")
         if(regexUnitSpecified.test(input)) {
@@ -63,8 +66,21 @@ export default function Meme() {
         event.preventDefault();
 
         const input = document.querySelector("#stroke-input").value
-        console.log(input);
-        setTextStroke(input)
+        // checks if the user typed "px" after numeric value of text-stroke
+        const regexUnitSpecified = /^\s*\d+\s*([.,]\s*\d+)?\s*px\s*$/i
+        // checks if the user did NOT type "px" after numeric value of text-stroke
+        const regexUnitUnspecified = /^\s*\d+\s*([.,]\s*\d+)?\s*$/
+
+        if(regexUnitSpecified.test(input)) {
+            console.log("Unit specified!");
+            console.log(formatInput(input) + " black");
+            setTextStroke(formatInput(input) + " black")
+        }
+        else if(regexUnitUnspecified.test(input)) {
+            console.log("Unit unspecified!");
+            console.log(formatInput(input) + "px black");
+            setTextStroke(formatInput(input) + "px black");
+        }
    }
 
     return (
@@ -122,7 +138,7 @@ export default function Meme() {
                     className="top-text"
                     style={{
                         fontSize: fontSize,
-                        WebkitTextStroke: textStroke + " black",
+                        WebkitTextStroke: textStroke,
                     }}
                 >
                     {topText}
@@ -131,7 +147,7 @@ export default function Meme() {
                     className="bottom-text"
                     style={{
                         fontSize: fontSize,
-                        WebkitTextStroke: textStroke + " black",
+                        WebkitTextStroke: textStroke,
                     }}
                 >
                     {bottomText}
